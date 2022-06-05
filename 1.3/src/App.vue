@@ -4,22 +4,10 @@
     <header>
       <h1>Books<span>.app</span></h1>
     </header>
-
-    <!-- no books message -->
-    <p v-show="!books.length">No books...</p>
-<!-- books message -->
-    <ul>
-      <li v-bind:key="i" v-for="(book, i) in books">
-        {{book.title}}, {{book.price}}$
-        <button @click="removeBook(i)">Remove Book</button>
-      </li>
-    </ul>
+<books-list :myBooks="books" @remove="removeBook" />
     <!-- zadanie 1 -->
     <div>
-      <p v-if="booksAmount () > 5">{{booksAmount ()}} books</p>
-      <p v-else-if="booksAmount () > 1">Not too many of them…</p>
-      <p v-else-if="booksAmount () === 1">One single book!</p>
-      <p v-else>Go get some books!</p>
+      <p>{{booksAmount}}</p>
     </div>
     <!-- add book form -->
 
@@ -38,6 +26,7 @@
   </div>
 </template>
 <script>
+import BooksList from './components/BooksList'
 
 export default {
   name: 'App',
@@ -58,10 +47,23 @@ export default {
       // zadanie 2
       this.newBook = { title: '', price: 0 }
     },
-    removeBook (i) { this.books.splice(i, 1) },
+    removeBook (i) { this.books.splice(i, 1) }
+  },
+  computed: {
     booksAmount () {
-      return this.books.length
+      if (this.books.length > 5) {
+        return this.books.length + 'books'
+      } else if (this.books.length > 1) {
+        return 'Not too many of them…'
+      } else if (this.books.length === 1) {
+        return 'One single book!'
+      } else {
+        return 'Go get some books!'
+      }
     }
+  },
+  components: {
+    BooksList
   }
 }
 </script>
