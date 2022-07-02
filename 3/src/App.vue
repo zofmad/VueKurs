@@ -6,7 +6,11 @@
       <app-header />
 
       <main>
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <slide-fade-animation-item class="animate__faster">
+            <component :is="Component" :key="$route.fullPath" />
+          </slide-fade-animation-item>
+        </router-view>
       </main>
 
       <app-footer />
@@ -17,6 +21,7 @@
 <script>
 import AppFooter from '@/components/layout/theFooter'
 import AppHeader from '@/components/layout/theHeader'
+import SlideFadeAnimation from '@/components/layout/SlideFadeAnimation'
 
 import './styles/global.scss'
 import './styles/normalize.scss'
@@ -27,7 +32,8 @@ export default {
   name: 'App',
   components: {
     AppFooter,
-    AppHeader
+    AppHeader,
+    SlideFadeAnimation
   },
   created () {
     return mapActions.fetchCategories

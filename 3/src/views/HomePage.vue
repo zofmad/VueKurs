@@ -1,17 +1,20 @@
 <template>
   <div class="home">
-    <MainTitle>Home Page</MainTitle>
+    <PageTitle>Photos</PageTitle>
+    <PhotosCatalog />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import MainTitle from '@/components/layout/MainTitle'
+import PageTitle from '@/components/layout/PageTitle'
+import PhotosCatalog from '@/components/features/PhotosCatalog'
 
 export default {
   name: 'HomePage',
   components: {
-    MainTitle
+    PageTitle,
+    PhotosCatalog
   }
 }
 </script>
